@@ -21,6 +21,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->first();
+        dd($product->categories->toArray());
         $products = Product::limit(4)->get();
         $categories = Category::limit(11)->get();
         return view('products.show', [

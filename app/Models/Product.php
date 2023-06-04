@@ -13,4 +13,9 @@ class Product extends Model
     {
         return "RS" . " " . $this->price / 10;
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
