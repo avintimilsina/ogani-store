@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -22,9 +24,7 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/home', function () {
-   return view('home');
-});
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/about', function () {
    return view('about');
@@ -32,4 +32,7 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
    return view('contact');
 });
-Route::get('/category', [CategoryController::class, 'getAction']);
+Route::get('/category', [CategoryController::class, 'getAll']);
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/product/{slug}', [ProductController::class, 'show']);

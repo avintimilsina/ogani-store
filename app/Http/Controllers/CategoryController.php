@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function getAction()
+    public function getAll()
     {
-        $categories = Category::where('id', 1)->get();
-        dd($categories[0]->toArray());
+        $categories = Category::all();
+        // dd($categories->toArray());
+        return view('category', ['categories' => $categories]);
     }
+
 }
