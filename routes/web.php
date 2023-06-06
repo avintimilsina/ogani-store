@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -32,6 +33,7 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
    return view('contact');
 });
+Route::post('/cart', [CartController::class, 'add']);
 Route::get('/category', [CategoryController::class, 'getAll']);
 
 Route::get('/products', [ProductController::class, 'index']);

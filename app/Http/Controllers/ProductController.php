@@ -8,10 +8,23 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        $categories = Category::limit(11)->get();
+        $filterCategorySlug = $request->get('category');
+
+        $categories = Category::take(11)->get();
+
+        $category = Category::where('slug', $filterCategorySlug)->first();
+
+        if (@$category) {
+            //defining realtion between category and product from the products() funvtion in the Category Controller
+            $products = $category->products()->get();
+        } else {
+
+            $products = Product::all();
+        }
+
+
         return view('products.list', [
             'products' => $products,
             'categories' => $categories,
@@ -21,7 +34,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        dd($product->categories->toArray());
+        // dd($product->categories->toArray());
         $products = Product::limit(4)->get();
         $categories = Category::limit(11)->get();
         return view('products.show', [

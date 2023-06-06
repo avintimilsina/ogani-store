@@ -101,15 +101,19 @@
                         </div>
                         <div class="product__details__price">{{ $product->formatted_amount() }}</div>
                         <p>{{ $product->description }}</p>
-                        <div class="product__details__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
+                        <form method="post" action="/cart">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                            <div class="product__details__quantity">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="text" value="1" name="quantity">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            <button type="submit" class="primary-btn">ADD TO CART</button>
+                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        </form>
                         <ul>
                             <li><b>Availability</b> <span>{{ $product->quantity > 0 ? 'IN STOCK' : 'OUT OF STOCK' }}</span>
                             </li>
