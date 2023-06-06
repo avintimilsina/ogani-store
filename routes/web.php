@@ -34,6 +34,8 @@ Route::get('/contact', function () {
    return view('contact');
 });
 Route::post('/cart', [CartController::class, 'add']);
+Route::get('/cart', [CartController::class, 'show']);
+
 Route::get('/category', [CategoryController::class, 'getAll']);
 
 Route::get('/products', [ProductController::class, 'index']);

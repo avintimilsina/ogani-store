@@ -22,4 +22,8 @@ class CartController extends Controller
         ]);
         return back();
     }
+    public function show()
+    {
+        return view('cart');
+    }
 }
