@@ -36,4 +36,12 @@ class CartController extends Controller
             ]
         );
     }
+    public function remove(Request $request)
+    {
+        $shoppingCart = Cart::name('shopping');
+        $shoppingCart->removeItem($request->itemHash);
+
+        return redirect()->back()->with('success', 'Product removed from cart successfully!');
+    }
+
 }

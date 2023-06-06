@@ -56,9 +56,13 @@
                                             {{ $item->getPrice() * $item->getQuantity() }}
                                         </td>
                                         <td class="shoping__cart__item__close">
-                                            {{-- <button class="btn btn-danger"
-                                                onclick={{removeItem($item,$withEvent=true)}}>Remove</button> --}}
-                                            <span class="icon_close"></span>
+                                            <form action="{{ route('cart.remove') }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="itemHash" value="{{ $item->getHash() }}" />
+                                                <button type="submit">Remove</button>
+                                            </form>
+                                            {{-- <span class="icon_close"></span> --}}
                                         </td>
                                     </tr>
                                 @endforeach

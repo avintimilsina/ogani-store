@@ -35,6 +35,8 @@ Route::get('/contact', function () {
 });
 Route::post('/cart', [CartController::class, 'add']);
 Route::get('/cart', [CartController::class, 'show']);
+Route::delete('/cart', [CartController::class, 'remove'])->name('cart.remove');
+//?
 
 
 Route::get('/category', [CategoryController::class, 'getAll']);
