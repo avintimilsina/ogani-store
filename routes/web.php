@@ -36,6 +36,7 @@ Route::get('/contact', function () {
 Route::post('/cart', [CartController::class, 'add']);
 Route::get('/cart', [CartController::class, 'show']);
 
+
 Route::get('/category', [CategoryController::class, 'getAll']);
 
 Route::get('/products', [ProductController::class, 'index']);

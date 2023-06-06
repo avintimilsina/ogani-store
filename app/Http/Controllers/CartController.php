@@ -6,8 +6,11 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Jackiedo\Cart\Facades\Cart;
 
+
+
 class CartController extends Controller
 {
+    protected $cart;
     public function add(Request $request)
     {
         $product = Product::find($request->product_id);
@@ -20,10 +23,17 @@ class CartController extends Controller
             'quantity' => (int) $request->quantity,
             'price' => $product->price / 10,
         ]);
-        return back();
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
-    public function show()
+    public function show(Cart $cart)
     {
-        return view('cart');
+        $items = Cart::name('shopping')->getItems();
+        // dd($items);
+        return view(
+            'cart',
+            [
+                'items' => $items,
+            ]
+        );
     }
 }
