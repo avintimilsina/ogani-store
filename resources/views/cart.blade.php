@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($items as $item)
+                                @foreach ($items as $hash => $item)
                                     <tr>
                                         <td class="shoping__cart__item">
                                             <img src="img/cart/cart-1.jpg" alt="">
@@ -55,14 +55,20 @@
                                         <td class="shoping__cart__total">
                                             {{ $item->getPrice() * $item->getQuantity() }}
                                         </td>
-                                        <td class="shoping__cart__item__close">
-                                            <form action="{{ route('cart.remove') }}" method="POST">
+                                        <td class="shoping__cart__item__close" onclick="deleteCart('{{ $hash }}')">
+                                            {{-- <form action="{{ route('cart.remove') }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="hidden" name="itemHash" value="{{ $item->getHash() }}" />
-                                                <button type="submit">Remove</button>
+                                                <button type="submit" 
+                                                >Remove</button>
+                                            </form> --}}
+                                            <span class="icon_close"></span>
+                                            <form method="post" id="deleteForm-{{ $hash }}" action="/cart/remove">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="itemHash" value={{ $hash }} />
                                             </form>
-                                            {{-- <span class="icon_close"></span> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -94,8 +100,8 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span> {{ Cart::name('shopping')->getDetails()->get('total') }}</span></li>
-                            <li>Total <span> {{ Cart::name('shopping')->getDetails()->get('total') }}</span></li>
+                            <li>Subtotal <span> {{ $subTotal }}</span></li>
+                            <li>Total <span> {{ $total }}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -104,4 +110,17 @@
         </div>
     </section>
     <!-- Shoping Cart Section End -->
+@endsection
+
+@section('scripts')
+    <script>
+        function deleteCart(hash) {
+            let userConfirmation = confirm("Are you sure you want to delete this item ?")
+            if (!userConfirmation) {
+                return;
+            }
+            let form = $('#deleteForm-' + hash);
+            form.submit();
+        }
+    </script>
 @endsection

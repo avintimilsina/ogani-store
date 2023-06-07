@@ -25,23 +25,28 @@ class CartController extends Controller
         ]);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
-    public function show(Cart $cart)
+    public function show()
     {
-        $items = Cart::name('shopping')->getItems();
-        // dd($items);
+        $shoppingCart = Cart::name('shopping');
+        $items = $shoppingCart->getItems();
+        $total = $shoppingCart->getTotal();
+        $subTotal = $shoppingCart->getSubTotal();
         return view(
             'cart',
             [
                 'items' => $items,
+                'total' => $total,
+                'subTotal' => $subTotal
             ]
         );
     }
-    public function remove(Request $request)
+    public function delete(Request $request)
     {
+        $hash = $request->itemHash;
         $shoppingCart = Cart::name('shopping');
-        $shoppingCart->removeItem($request->itemHash);
+        $shoppingCart->removeItem($hash);
 
-        return redirect()->back()->with('success', 'Product removed from cart successfully!');
+        return back();
     }
 
 }
