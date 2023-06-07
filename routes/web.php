@@ -38,7 +38,7 @@ Route::post('/cart', [CartController::class, 'add']);
 Route::get('/cart', [CartController::class, 'show']);
 Route::delete('/cart/remove', [CartController::class, 'delete']);
 //?
-Route::post('/checkout', [CheckoutController::class, 'show']);
+Route::get('/checkout', [CheckoutController::class, 'show']);
 
 Route::get('/category', [CategoryController::class, 'getAll']);
 

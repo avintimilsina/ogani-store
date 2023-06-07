@@ -271,3 +271,44 @@
 </body>
 
 </html>
+
+
+
+{{-- orders
+    id->auto incre
+    tracking_id->string->unique
+    total->int
+    first_name->
+    last_name->
+    email->
+    phone->
+    billing_id-> forgeinId to address
+    shipping_id-> forgeinId to address
+    shipping_id-> forgeinId to payment
+    --}}
+
+
+{{-- payments
+        id->auto incr
+        payment_gateway_id->
+        status-> enum{
+            PAID
+            PARTIAL
+            PENDING
+            NOT PAID
+        }
+ --}}
+
+{{-- payment_gateway
+        id->auto incr
+        name->string()
+        code->
+--}}
+
+{{-- address
+    id->
+    country->
+    Province
+    district
+    streetAddress
+    zipcode --}}
