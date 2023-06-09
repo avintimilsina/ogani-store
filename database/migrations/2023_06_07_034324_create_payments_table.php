@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('payment_gateway_id')->constrained('payment_gateways', 'id');
             $table->string('payment_status');
+            $table->string('transaction_id')->nullable();
             $table->decimal('price_paid');
             $table->timestamps();
         });

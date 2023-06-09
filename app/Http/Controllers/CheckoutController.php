@@ -59,7 +59,7 @@ class CheckoutController extends Controller
 
         $order = Order::create([
             'tracking_id' => "ORA-" . uniqid(),
-            'total' => $total,
+            'total' => $total * 100,
             'full_name' => $data['first_name'] . ' ' . $data['last_name'],
             'email' => $data['email'],
             'phone_number' => $data['phone'],
@@ -79,6 +79,6 @@ class CheckoutController extends Controller
         }
         $shoppingCart->destroy();
 
-        return redirect()->route('payment.show', ['paymentGateway' => $data['payment_gateway']])->with([    'orderId' => $order->tracking_id]);
+        return redirect()->route('payment.show', ['paymentGateway' => $data['payment_gateway']])->with(['orderId' => $order->tracking_id]);
     }
 }

@@ -21,7 +21,7 @@ class CartController extends Controller
             'id' => $product->id,
             'title' => $product->name,
             'quantity' => (int) $request->quantity,
-            'price' => $product->price / 10,
+            'price' => $product->price / 100,
         ]);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
