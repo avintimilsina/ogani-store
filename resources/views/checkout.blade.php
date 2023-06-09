@@ -78,30 +78,38 @@
                                 <p>Address<span>*</span></p>
                                 <input type="text" placeholder="Street Address" class="checkout__input__add"
                                     name="address" value="{{ old('address') }}">
+                                <small> {{ $errors->first('address') }}</small>
                             </div>
                             <div class="checkout__input">
                                 <p>District<span>*</span></p>
                                 <input type="text" name="district" value="{{ old('district') }}">
+
+                                <small> {{ $errors->first('district') }}</small>
                             </div>
                             <div class="checkout__input">
                                 <p>Province<span>*</span></p>
                                 <input type="text" name="province" value="{{ old('province') }}">
+                                <small> {{ $errors->first('province') }}</small>
                             </div>
                             <div class="checkout__input">
                                 <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text" name="zip">
+                                <input type="text" name="zip" value="{{ old('zip') }}">
+                                <small> {{ $errors->first('zip') }}</small>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text" name="phone">
+                                        <input type="text" name="phone" value="{{ old('phone') }}">
+                                        <small> {{ $errors->first('phone') }}</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" name="email">
+                                        <input type="text" name="email" value="{{ old('email') }}">
+                                        <small> {{ $errors->first('phone') }}</small>
+
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +130,8 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Cash on delivery
-                                        <input type="radio" id="payment" name="payment_gateway" value="cash_on_delivery"
-                                            @if (old('payment_gateway') == 'cash_on_delivery') checked @endif>
+                                        <input type="radio" id="payment" name="payment_gateway" value="cod"
+                                            @if (old('payment_gateway') == 'cod') checked @endif>
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

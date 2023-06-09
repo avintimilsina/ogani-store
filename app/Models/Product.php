@@ -11,7 +11,7 @@ class Product extends Model
 
     public function formatted_amount()
     {
-        return "RS" . " " . $this->price / 10;
+        return "RS" . " " . $this->price / 100;
     }
 
     public function categories()

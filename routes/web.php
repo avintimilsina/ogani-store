@@ -4,7 +4,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use Faker\Provider\Payment;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -20,13 +22,12 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::get('/', function () {
-   dd('Welcome');
    return view('welcome');
 });
 
 Route::get('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
    return view('about');
@@ -43,5 +44,9 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 
 Route::get('/category', [CategoryController::class, 'getAll']);
 
+Route::get('/payment/{paymentGateway}', [PaymentController::class, 'show'])->name('payment.show');
+
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/product/{slug}', [ProductController::class, 'show']);
+
+Route::get('/thankyou', [PaymentController::class, 'thankyou'])->name('thankyou');
