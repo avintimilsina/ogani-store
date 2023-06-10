@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\PaymentsRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class ProductCrudController
+ * Class PaymentsCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class ProductCrudController extends CrudController
+class PaymentsCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class ProductCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Product::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
-        CRUD::setEntityNameStrings('product', 'products');
+        CRUD::setModel(\App\Models\Payments::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/payments');
+        CRUD::setEntityNameStrings('payments', 'payments');
     }
 
     /**
@@ -39,19 +39,10 @@ class ProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('name');
-        CRUD::column('slug');
-        CRUD::column('description');
-        CRUD::column('information');
-        CRUD::column('quantity');
-        CRUD::addColumn([
-            'label' => 'Price',
-            'type' => 'closure',
-            'function' => function ($product) {
-                return $product->formatted_amount();
-            }
-        ]);
-        CRUD::column('is_active');
+        CRUD::column('payment_gateway_id');
+        CRUD::column('payment_status');
+        CRUD::column('transaction_id');
+        CRUD::column('price_paid');
         CRUD::column('created_at');
         CRUD::column('updated_at');
 
@@ -70,27 +61,12 @@ class ProductCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ProductRequest::class);
+        CRUD::setValidation(PaymentsRequest::class);
 
-        CRUD::field('name');
-        CRUD::addField([
-            'label' => 'Description',
-            'type' => 'summernote',
-            'name' => 'description'
-        ]);
-        CRUD::field('information');
-        CRUD::field('quantity');
-        CRUD::field('price');
-        CRUD::field('is_active');
-
-        CRUD::addField([
-            "label" => "Category",
-            "type" => "select_multiple",
-            "name" => "categories",
-
-        ]);
-
-     
+        CRUD::field('payment_gateway_id');
+        CRUD::field('payment_status');
+        CRUD::field('transaction_id');
+        CRUD::field('price_paid');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

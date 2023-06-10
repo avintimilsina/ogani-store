@@ -22,17 +22,13 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
-    // protected function price()
-    // {
-    //     return Attribute::make(
-    //         get: function ($value) {
-    //             return $value / 100;
-    //         },
-    //         set: function ($value) {
-    //             return $value * 100;
-    //         }
-    //     );
-    // }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = str()->slug($value);
+    }
+
     public function setPriceAttribute($value)
     {
         $this->attributes['price'] = $value * 100;

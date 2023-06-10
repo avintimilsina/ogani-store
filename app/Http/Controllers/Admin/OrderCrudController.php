@@ -95,4 +95,17 @@ class OrderCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    public function setupShowOperation()
+    {
+
+        $this->autoSetupShowOperation();
+
+        CRUD::addColumn([
+            'label' => 'Order Items',
+            'type' => 'items',
+            'name' => 'items',
+            'attribute' => 'name',
+        ]);
+    }
 }
