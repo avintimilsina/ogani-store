@@ -90,7 +90,12 @@ class ProductCrudController extends CrudController
 
         ]);
 
-     
+        CRUD::addField([
+            'label' => 'Product Images',
+            'type' => 'upload_multiple',
+            'upload' => true,
+            'name' => 'images',
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

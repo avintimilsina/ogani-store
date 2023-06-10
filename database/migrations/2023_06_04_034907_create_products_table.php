@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string("slug")->unique();
             $table->mediumText("description")->nullable();
             $table->mediumText("information")->nullable();
+            $table->json("images")->nullable();
             $table->integer("quantity");
             $table->integer("price");
             $table->boolean("is_active")->default(true);

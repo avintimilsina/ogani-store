@@ -16,6 +16,10 @@ class Product extends Model implements HasMedia
     use InteractsWithMedia;
     protected $guarded = [];
 
+    protected $casts = [
+        'images' => 'array',
+    ];
+
     public function formatted_amount()
     {
         return "RS" . " " . $this->price;
@@ -40,5 +44,10 @@ class Product extends Model implements HasMedia
     public function getPriceAttribute($value)
     {
         return $value / 100;
+    }
+
+    public function setImagesAttribute($value)
+    {
+        $this->uploadMultipleFilesToDisk($value, 'images', 'public', 'products');
     }
 }

@@ -22,7 +22,6 @@ class CategoryFactory extends Factory
             'name' => $name,
             'slug' =>str()->slug($name),
             'description' => fake()->text(),
-            'image_url' => fake()->imageUrl(),
 
         ];
     }
