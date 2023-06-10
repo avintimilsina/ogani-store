@@ -73,7 +73,7 @@ class CheckoutController extends Controller
                 'product_id' => $item->getId(),
                 'name' => $item->getTitle(),
                 'quantity' => $item->getQuantity(),
-                'price' => $item->getPrice() * 10,
+                'price' => $item->getPrice() * 100,
             ]);
 
         }
