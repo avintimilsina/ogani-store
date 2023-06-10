@@ -18,10 +18,10 @@ class ProductController extends Controller
 
         if (@$category) {
             //defining realtion between category and product from the products() funvtion in the Category Controller
-            $products = $category->products()->get();
+            $products = $category->products()->orderBy('created_at', 'desc')->get();
         } else {
 
-            $products = Product::all();
+            $products = Product::orderBy('created_at', 'desc')->get();
         }
 
 

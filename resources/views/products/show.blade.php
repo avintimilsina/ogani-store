@@ -73,18 +73,19 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
-                            <img class="product__details__pic__item--large" src="img/product/details/product-details-1.jpg"
+                            <img class="product__details__pic__item--large"
+                                src="@if ($product->images != null && count($product->images) > 0) {{ Storage::url($product->images[0]) }}@else img/product/product-1.jpg @endif"
                                 alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                src="img/product/details/thumb-1.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                src="img/product/details/thumb-2.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                src="img/product/details/thumb-3.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                src="img/product/details/thumb-4.jpg" alt="">
+                            @if ($product->images && count($product->images) > 0)
+                                @foreach ($product->images as $image)
+                                    <img data-imgbigurl="{{ Storage::url($image) }}" src="{{ Storage::url($image) }}"
+                                        alt="">
+                                @endforeach
+                            @endif
+
+
                         </div>
                     </div>
                 </div>
@@ -100,7 +101,7 @@
                             <span>(18 reviews)</span>
                         </div>
                         <div class="product__details__price">{{ $product->formatted_amount() }}</div>
-                        <p>{{ $product->description }}</p>
+                        <p>{ !!$product->description !!}</p>
                         <form method="post" action="/cart">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}" />
